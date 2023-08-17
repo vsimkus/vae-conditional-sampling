@@ -1,0 +1,145 @@
+seed_everything: 20220118
+experiment_subdir_base: logs/omniglot28x28_bin/imputation/q50/vae_convresnet2_k1_irwg_i1_h4_dmis_gr_mult
+data:
+  setup_seed: 20220118
+  dataset: 'omniglot28x28_fbin'
+  use_test_instead_val: False
+  batch_size: 200
+  missingness: 'quadrants'
+  img_dims:
+   - 28
+   - 28
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.50
+  data_root: ./data
+model: VAE
+model_path: logs/omniglot28x28_bin/imputation/vae_convresnet2/seed_m20220118_d20220118/lightning_logs/version_{}/checkpoints/epoch=2999-step=411000.ckpt
+test_class:
+  class_path: irwg.sampling.test_step_vae_sampling.TestVAELatentAdaptiveImportanceResampling
+  init_args:
+    num_iterations: 5000
+    num_copies: 1
+    imputation_fn: vae_samples
+
+    no_historic_proposals_iterations: 20
+    num_historical_proposals: 4
+    imputation_history_length: 1000
+
+    num_imp_samples: 1
+    weighting_scheme: dmis
+    resampling_scheme: gr
+    resampling_method: multinomial
+
+    imputation_metric_quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+    compute_f1_metric: True
+    compute_inv_f1_metric: True
+    compute_bin_accuracy_metric: True
+    compute_rmse_metric: False
+    compute_ssim_metric: True
+    compute_latent_wass_metric: True
+
+    # Store imputations
+    store_last_n_iterations: -1
+    store_every_n_iterations: 100
+
+    save_img_snapshot_in_tb: True
+    snapshot_image_dims: 
+     - 28
+     - 28
+
+    # estimate_sampler_ess: True
+    # sampler_ess_estimator_warmup: 400
+    # ess_evaluation_batchsize: 100
+    # normalise_trajectory_ess_by_is_ess: True
+
+    # estimate_mmd_with_model: False
+    # mmd_estimator_kernel: exp_ssim_c1_img28x28_b150000
+    # mmd_estimator_size: 1000
+    # # mmd_estimator_frequency: 5
+    # mmd_estimator_frequency: 200
+    # mmd_avg_of_chains: False
+
+    # estimate_mmd_target_num_repeats: 10
+
+    # estimate_kl_div_for_full_chain: True
+    # kl_div_kde_kernel: exp_hamming
+    # kl_div_iwelbo_num_importance_samples: 5000
+    # estimate_kl_div: False
+    # kl_div_estimator_frequency: 5
+
+    # estimate_kid_chain: True
+    # fid_estimator_size: 20000
+    # kid_full_chain_linear_estimator_repeats: 10
+    # kid_estimator_kernel: poly
+
+    # estimate_mog_kldivs: true
+    # num_mog_em_iterations: 50
+    # num_mog_kl_samples: 10000
+    # mog_kldivs_skip_first_num_imps: 400
+    # mog_em_use_solver: False
+    # estimate_mog_jsd: True
+
+    
+trainer:
+  # logger: true
+  # checkpoint_callback: null
+  # enable_checkpointing: true
+  # callbacks: null
+  # default_root_dir: null
+  # gradient_clip_val: 10
+  # gradient_clip_algorithm: norm
+  # process_position: 0
+  # num_nodes: 1
+  # num_processes: 1
+  # devices: null
+  # gpus: null
+  # auto_select_gpus: false
+  # tpu_cores: null
+  # ipus: null
+  # log_gpu_memory: null
+  # progress_bar_refresh_rate: null
+  # enable_progress_bar: true
+  # overfit_batches: 0.0
+  # track_grad_norm: -1
+  # check_val_every_n_epoch: 1
+  # fast_dev_run: false
+  # accumulate_grad_batches: null
+  max_epochs: 500
+  # min_epochs: null
+  # max_steps: -1
+  # min_steps: null
+  # max_time: null
+  # limit_train_batches: 1.0
+  # limit_val_batches: 1.0
+  # limit_test_batches: 1.0
+  # limit_predict_batches: 1.0
+  # val_check_interval: 1.0
+  # flush_logs_every_n_steps: null
+  log_every_n_steps: 1
+  # accelerator: null
+  # strategy: null
+  # sync_batchnorm: false
+  # precision: 32
+  # enable_model_summary: true
+  # weights_summary: top
+  # weights_save_path: null
+  # num_sanity_val_steps: 2
+  # resume_from_checkpoint: null
+  # profiler: null
+  # benchmark: false
+  # deterministic: false
+  # reload_dataloaders_every_n_epochs: 0
+  # reload_dataloaders_every_epoch: false
+  # auto_lr_find: false
+  # replace_sampler_ddp: true
+  # detect_anomaly: false
+  # auto_scale_batch_size: false
+  # prepare_data_per_node: null
+  # plugins: null
+  # amp_backend: native
+  # amp_level: null
+  # move_metrics_to_cpu: false
+  # multiple_trainloader_mode: max_size_cycle
+  # stochastic_weight_avg: false
+  # terminate_on_nan: null

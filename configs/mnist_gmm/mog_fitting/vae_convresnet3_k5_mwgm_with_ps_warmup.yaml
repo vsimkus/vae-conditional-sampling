@@ -1,0 +1,25 @@
+experiment_dir: logs/mnist_gmm/imputation/mog_fitting/vae_convresnet3_k5_mwgm_with_ps_warmup/seed_m20220118_d20220118/lightning_logs/version_{}/
+experiment_path: logs/mnist_gmm/imputation/samples/vae_convresnet3_k5_mwgm_with_ps_warmup/seed_m20220118_d20220118/lightning_logs/version_{}/
+
+seed_everything: 20220118
+data:
+  setup_seed: 20220118
+  dataset: 'mnist_gmm_custtest0'
+  use_test_instead_val: False
+  batch_size: 20
+  missingness: 'nan_miss'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.0
+  data_root: ./data
+
+batch_size: 20
+every_nth_step: 5
+
+fit_iterations: [100, 500, 1000, 5000, 10000]
+num_em_iterations: 100
+num_kl_samples: 10000
+use_batched_per_datapoint_computation: true
+# em_init_params_to_true_joint: true
+em_init_params_to_true_cond: True
+em_dont_reset_on_failure: true

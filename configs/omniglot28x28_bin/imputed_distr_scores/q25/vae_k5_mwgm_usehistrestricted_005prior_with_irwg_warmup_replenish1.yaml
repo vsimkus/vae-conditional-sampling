@@ -1,0 +1,25 @@
+experiment_dir: logs/omniglot28x28_bin/imputation/eval_imputed_distr_scores/q25/vae_convresnet2_k5_mwgm_usehistrestricted_005prior_with_irwg_warmup_replenish1/seed_m{}_d20220118/lightning_logs/version_{}/
+experiment_path: logs/omniglot28x28_bin/imputation/q25/vae_convresnet2_k5_mwgm_usehistrestricted_005prior_with_irwg_warmup_replenish1/seed_m{}_d20220118/lightning_logs/version_{}/
+
+vae_path: logs/omniglot28x28_bin/imputation/vae_convresnet2/seed_m20220118_d20220118/lightning_logs/version_{}/checkpoints/epoch=2999-step=411000.ckpt
+
+seed_everything: 20220118
+data:
+  setup_seed: 20220118
+  dataset: 'omniglot28x28_fbin'
+  use_test_instead_val: False
+  batch_size: 200
+  missingness: 'quadrants'
+  img_dims:
+   - 28
+   - 28
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.25
+  data_root: ./data
+
+last_n_imputations: 1
+every_nth_step: 1
+
+process_irwg_finalresample: False
+

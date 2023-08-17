@@ -1,0 +1,50 @@
+# Create environment with `conda env create -f environment.yml`
+# Activate environment with `conda activate irwg`
+# Update environment with `conda env update --file environment.yml`
+# Remove environment with `conda remove --name irwg --all`
+
+#
+# NOTE: Created this env, since the other environment had issues
+# with my native GPU hardware and nvidia driver (keops compilation failed)
+# It was due to the cudatoolkit version that was installed as part of pytorch=1.10.
+# Since I didn't want to change the pytorch version for other parts of the project
+# I created this separate environment just to run evaluations that require keops.
+# Also installed cuda-toolkit-12-2 from nvidia (for my nvidia driver 535 and RTX 4050 (mobile) gpu,
+# but cuda-toolkit versions from 11-6 (?, according to Ada Lovelace architecture wiki) should work)
+#
+
+
+name: irwg_keops
+channels:
+    - pytorch
+    - conda-forge
+    - anaconda
+    - nvidia
+dependencies:
+    - python=3.8
+    - flake8
+    - pytorch=2.0.1
+    - pytorch-cuda=11.8
+    - torchvision=0.15.2
+    - pip
+    - pip:
+        # - pytorch-lightning==1.5.8
+        - pytorch-lightning==1.6.5
+        # - jsonargparse[signatures]==4.1.2
+        - jsonargparse[signatures]==4.7.1
+        - einops==0.3.2
+        - geomloss==0.2.6
+        - pykeops==2.1.2
+        - wget
+        - lmdb
+        - xlrd
+        - h5py
+    - tqdm
+    - numpy #=1.21.2
+    - ipython
+    - ipykernel
+    - ipywidgets
+    - pandas
+    - scikit-learn
+    - matplotlib
+    - imageio

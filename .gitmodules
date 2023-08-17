@@ -1,0 +1,3 @@
+[submodule "irwg/dependencies/MISELBO"]
+	path = irwg/dependencies/MISELBO
+	url = git@github.com:Lagergren-Lab/MISELBO.git

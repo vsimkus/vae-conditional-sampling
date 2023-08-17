@@ -1,0 +1,32 @@
+experiment_dir: logs/uci_miniboone/imputation/eval_sampling_u50_diagfid_nn_imps/vae2_no_kl_sched_drop05_k4_irwg_i1_dmis_gr_mult_1replenish_finalresample/seed_m20220118_d20220118/lightning_logs/version_{}/
+experiment_path: logs/uci_miniboone/imputation/sampling_u50/vae2_no_kl_sched_drop05_k4_irwg_i1_dmis_gr_mult_1replenish_finalresample/seed_m20220118_d20220118/lightning_logs/version_{}/
+nn_imp_path: logs/uci_miniboone/imputation/find_train_nn/uci_miniboone/seed_m20220118_d20220118/lightning_logs/version_0/
+
+seed_everything: 20220118
+data:
+  setup_seed: 20220118
+  dataset: uci_miniboone
+  use_test_instead_val: False
+  num_first_datapoints_test: 3000
+  batch_size: 512
+  missingness: 'uniform'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.5
+  filter_fully_missing_test: True
+  data_root: ./data
+
+# To generate imputations from
+vae_path: logs/uci_miniboone/imputation/vae2_no_kl_sched_drop05/seed_m20220118_d20220118/lightning_logs/version_{}/checkpoints/
+load_best_vae: True
+# use_marginal_vae_samples_instead_of_imputations: True
+
+use_N_nn_imps: 100
+
+compute_diagfid: True
+
+batch_size: 512
+last_n_imputations: 2900
+every_nth_step: 1
+
+process_irwg_finalresample: True

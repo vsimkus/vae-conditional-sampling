@@ -1,0 +1,32 @@
+experiment_dir: logs/uci_power/imputation/eval_sampling_u50_imputed_dataset_divergences/vae_wtrainnoise_no_kl_sched_marginal_vae_baseline/seed_m{}_d20220118/lightning_logs/version_{}/
+experiment_path: logs/uci_power/imputation/sampling_u50/vae_wtrainnoise_no_kl_sched_marginal_vae_baseline/seed_m{}_d20220118/lightning_logs/version_{}/
+
+seed_everything: 20220118
+data:
+  setup_seed: 20220118
+  dataset: uci_power
+  use_test_instead_val: False
+  num_first_datapoints_test: 3000
+  batch_size: 512
+  missingness: 'uniform'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.5
+  filter_fully_missing_test: True
+  data_root: ./data
+
+# # To generate imputations from
+# vae_path: logs/uci_power/imputation/vae_wtrainnoise_no_kl_sched/seed_m20220118_d20220118/lightning_logs/version_{}/checkpoints/
+# load_best_vae: True
+# use_marginal_vae_samples_instead_of_imputations: True
+
+batch_size: 512
+last_n_imputations: 2500
+every_nth_step: 1
+
+process_irwg_finalresample: False
+
+backend: online
+
+compute_metrics: [ #sinkhorn_per_imputation, 
+                  energymmd_per_imputation, gaussianmmd_per_imputation, laplacianmmd_per_imputation]

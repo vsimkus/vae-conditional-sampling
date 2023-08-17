@@ -1,0 +1,105 @@
+seed_everything: 20220118
+experiment_subdir_base: logs/toy_grid2dmog4/imputation/sampling/vae_comptrain/mwgm_usehist_k1_no_warmup_temp005_it50000
+data:
+  setup_seed: 20220118
+  dataset: 'toy_grid2dmog_custtest0'
+  use_test_instead_val: False
+  batch_size: 100
+  missingness: 'nan_miss'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.0
+  data_root: ./data
+model: VAE
+model_path: logs/toy_grid2dmog4/imputation/vae_comptrain/seed_m20220118_d20220118/lightning_logs/version_{}/checkpoints/
+load_best: True
+test_class:
+  class_path: irwg.sampling.test_step_vae_sampling.TestVAEMetropolisWithinGibbsMarginalised_usinghistoryinproposalconditioningset
+  init_args:
+    num_pseudo_warmup_iterations: 1
+    num_mwg_iterations: 49999
+    num_copies: 1
+    imputation_fn: vae_samples
+
+    var_proposal_temperature: 0.05
+
+    clip_imputations_during_pg_warmup: True
+
+    imputation_metric_quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+    compute_f1_metric: False
+    compute_inv_f1_metric: False
+    compute_bin_accuracy_metric: False
+    compute_rmse_metric: False
+    compute_ssim_metric: False
+    compute_latent_wass_metric: False
+
+    # Store imputations
+    store_last_n_iterations: -1
+    store_every_n_iterations: 1
+
+    save_img_snapshot_in_tb: False
+    # snapshot_image_dims: 
+    #  - 28
+    #  - 28
+trainer:
+  # logger: true
+  # checkpoint_callback: null
+  # enable_checkpointing: true
+  # callbacks: null
+  # default_root_dir: null
+  # gradient_clip_val: 10
+  # gradient_clip_algorithm: norm
+  # process_position: 0
+  # num_nodes: 1
+  # num_processes: 1
+  # devices: null
+  # gpus: null
+  # auto_select_gpus: false
+  # tpu_cores: null
+  # ipus: null
+  # log_gpu_memory: null
+  # progress_bar_refresh_rate: null
+  # enable_progress_bar: true
+  # overfit_batches: 0.0
+  # track_grad_norm: -1
+  # check_val_every_n_epoch: 1
+  # fast_dev_run: false
+  # accumulate_grad_batches: null
+  # max_epochs: 500
+  # min_epochs: null
+  # max_steps: -1
+  # min_steps: null
+  # max_time: null
+  # limit_train_batches: 1.0
+  # limit_val_batches: 1.0
+  # limit_test_batches: 1.0
+  # limit_predict_batches: 1.0
+  # val_check_interval: 1.0
+  # flush_logs_every_n_steps: null
+  # log_every_n_steps: 1
+  # accelerator: null
+  # strategy: null
+  # sync_batchnorm: false
+  # precision: 32
+  # enable_model_summary: true
+  # weights_summary: top
+  # weights_save_path: null
+  # num_sanity_val_steps: 2
+  # resume_from_checkpoint: null
+  # profiler: null
+  # benchmark: false
+  # deterministic: false
+  # reload_dataloaders_every_n_epochs: 0
+  # reload_dataloaders_every_epoch: false
+  # auto_lr_find: false
+  # replace_sampler_ddp: true
+  # detect_anomaly: false
+  # auto_scale_batch_size: false
+  # prepare_data_per_node: null
+  # plugins: null
+  # amp_backend: native
+  # amp_level: null
+  # move_metrics_to_cpu: false
+  # multiple_trainloader_mode: max_size_cycle
+  # stochastic_weight_avg: false
+  # terminate_on_nan: null

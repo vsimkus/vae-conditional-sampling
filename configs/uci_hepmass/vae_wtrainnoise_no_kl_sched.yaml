@@ -1,0 +1,108 @@
+seed_everything: 20220118
+experiment_subdir_base: logs/uci_hepmass/imputation/vae_wtrainnoise_no_kl_sched
+add_checkpoint_callback: True
+data:
+  setup_seed: 20220118
+  dataset: uci_hepmass_wtrainnoise
+  use_test_instead_val: False
+  batch_size: 512
+  missingness: 'uniform'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  data_root: ./data
+model:
+  class_path: irwg.models.VAE
+  init_args:
+    # kl_beta_scheduler: linear_cyclic
+    # kl_beta_scheduler_conf_string: '0.0,1.0,1000,50000,200001'
+    generator_network:
+      class_path: irwg.models.neural_nets.ResidualFCNetwork
+      init_args:
+        input_dim: 16
+        output_dim: 42
+        num_residual_blocks: 2
+        residual_block_dim: 256
+        dropout_probability: 0.0
+        activation: relu
+    generator_distribution: normal_with_eps
+    var_latent_network:
+      class_path: irwg.models.neural_nets.ResidualFCNetwork
+      init_args:
+        input_dim: 21
+        output_dim: 32
+        num_residual_blocks: 2
+        residual_block_dim: 256
+        dropout_probability: 0.0
+        activation: relu
+    var_latent_distribution: normal_with_eps
+    encoder_use_mis_mask: False
+    kl_analytic: False
+    var_latent_STL: True
+    num_latent_samples: 8
+    lr_generator: 1e-3
+    lr_latent: 1e-3
+    use_lr_scheduler: True
+    amsgrad_generator: False
+    amsgrad_latent: False
+trainer:
+  # logger: true
+  # checkpoint_callback: null
+  # enable_checkpointing: true
+  # callbacks: null
+  # default_root_dir: null
+  gradient_clip_val: 10
+  gradient_clip_algorithm: norm
+  # process_position: 0
+  # num_nodes: 1
+  # num_processes: 1
+  # devices: null
+  # gpus: null
+  # auto_select_gpus: false
+  # tpu_cores: null
+  # ipus: null
+  # log_gpu_memory: null
+  # progress_bar_refresh_rate: null
+  # enable_progress_bar: true
+  # overfit_batches: 0.0
+  # track_grad_norm: -1
+  # check_val_every_n_epoch: 1
+  # fast_dev_run: false
+  # accumulate_grad_batches: null
+  # max_epochs: 1000
+  # min_epochs: null
+  max_steps: 200000
+  # min_steps: null
+  # max_time: null
+  # limit_train_batches: 1.0
+  # limit_val_batches: 1.0
+  # limit_test_batches: 1.0
+  # limit_predict_batches: 1.0
+  # val_check_interval: 1.0
+  # flush_logs_every_n_steps: null
+  log_every_n_steps: 1
+  # accelerator: null
+  # strategy: null
+  # sync_batchnorm: false
+  # precision: 32
+  # enable_model_summary: true
+  # weights_summary: top
+  # weights_save_path: null
+  # num_sanity_val_steps: 2
+  # resume_from_checkpoint: null
+  # profiler: null
+  # benchmark: false
+  # deterministic: false
+  # reload_dataloaders_every_n_epochs: 0
+  # reload_dataloaders_every_epoch: false
+  # auto_lr_find: false
+  # replace_sampler_ddp: true
+  # detect_anomaly: false
+  # auto_scale_batch_size: false
+  # prepare_data_per_node: null
+  # plugins: null
+  # amp_backend: native
+  # amp_level: null
+  # move_metrics_to_cpu: false
+  # multiple_trainloader_mode: max_size_cycle
+  # stochastic_weight_avg: false
+  # terminate_on_nan: null

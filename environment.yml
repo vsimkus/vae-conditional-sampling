@@ -1,0 +1,49 @@
+# Create environment with `conda env create -f environment.yml`
+# Activate environment with `conda activate irwg`
+# Update environment with `conda env update --file environment.yml`
+# Remove environment with `conda remove --name irwg --all`
+
+name: irwg
+channels:
+    - pytorch
+    - conda-forge
+    - anaconda
+dependencies:
+    - python=3.8
+    - flake8
+    - pytorch=1.10.1
+    - torchvision=0.11.2
+    # To address a bug in PyTorch 1.10.1 https://stackoverflow.com/questions/70520120/attributeerror-module-setuptools-distutils-has-no-attribute-version
+    # downgrading the setuptools to below version
+    - setuptools=59.5.0
+    # - cuda-nvcc=11.3.122
+    # - pycuda=2022.2.2
+    - imageio
+    - scikit-learn
+    - pip
+    - pip:
+        # - pytorch-lightning==1.5.8
+        - pytorch-lightning==1.6.5
+        # - jsonargparse[signatures]==4.1.2
+        - jsonargparse[signatures]==4.7.1
+        - einops==0.3.2
+        - tensorflow==2.7.0
+        - tensorflow-probability==0.15.0
+        - protobuf==3.9.2
+        - torchmetrics==0.9.3
+        - properscoring==0.1
+        - wget
+        - xlrd
+        - geomloss==0.2.5
+        - pykeops==2.1.1
+        - lmdb
+        - kPOD==0.18
+    - numba=0.55.1
+    - tqdm
+    - numpy=1.21.2
+    - scipy=1.7.3
+    - ipython
+    - matplotlib
+    - ipykernel
+    - ipywidgets
+    - pandas

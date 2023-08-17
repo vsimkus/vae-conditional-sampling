@@ -1,0 +1,27 @@
+experiment_dir: logs/uci_miniboone/imputation/eval_sampling_u50_imputed_dataset_divergences_diffseeds_lastimp/vae2_no_kl_sched_drop05_k5_mwgm_usehistrestricted_005prior_with_irwg_warmup_replenish1/seed_m{}_d20220118/lightning_logs/version_{}/
+experiment_path: logs/uci_miniboone/imputation/sampling_u50_wholedataset_storelast/vae2_no_kl_sched_drop05_k5_mwgm_usehistrestricted_005prior_with_irwg_warmup_replenish1/seed_m{}_d20220118/lightning_logs/version_{}/
+
+seed_everything: 20220118
+data:
+  setup_seed: 20220118
+  dataset: uci_miniboone
+  use_test_instead_val: False
+  num_first_datapoints_test: 50000
+  batch_size: 512
+  missingness: 'uniform'
+  total_miss_train: 0.0
+  total_miss_val: 0.0
+  total_miss_test: 0.5
+  filter_fully_missing_test: True
+  data_root: ./data
+
+batch_size: 512
+last_n_imputations: 1
+every_nth_step: 1
+
+process_irwg_finalresample: False
+
+backend: online
+
+compute_metrics: [ sinkhorn_per_imputation, 
+                  energymmd_per_imputation, gaussianmmd_per_imputation, laplacianmmd_per_imputation]

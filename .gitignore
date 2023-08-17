@@ -1,0 +1,60 @@
+# Python
+*__pycache__/
+*.pyc
+*.egg-info
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Slurm
+slurm-*.out
+
+# Lightning
+**/lightning_logs/**
+
+# Symlinks
+uci_logs_symlinks/**
+
+# Data
+**/data/MNIST/raw/
+**/data/ffhq
+**/data/cifar10/
+**/data/imagenet/
+**/data/omniglot-py/
+**/data/airfoil**
+**/data/cal_housing**
+**/data/banknote**
+**/data/blood_transfusion**
+**/data/breast_cancer_diagnostic**
+**/data/climate_model_crashes**
+**/data/concrete_compression**
+**/data/concrete_slump**
+**/data/connectionist_bench_sonar**
+**/data/connectionist_bench_vowel**
+**/data/ecoli**
+**/data/glass**
+**/data/ionosphere**
+**/data/libras**
+**/data/parkinsons**
+**/data/planning_relax**
+**/data/qsar_biodegradation**
+**/data/seeds**
+**/data/wine_quality_red**
+**/data/wine_quality_white**
+**/data/yacht_hydrodynamics**
+**/data/yeast**
+**/data/celeba**
+**/data/BSDS300/*.hdf5
+**/data/gas/*.pickle
+**/data/hepmass/*.csv
+**/data/power/*.pickle
+**/data/power/*.csv
+**/data/power/*.txt
+**/data/power/*data.npy
+**/data/miniboone/*data.npy
+
+# Models
+models/**
